@@ -1,10 +1,7 @@
 # A program that looks for prime numbers
 
-from time import clock
+from time import perf_counter
 from math import sqrt
-
-from colorama import Fore
-from colorama import Style
 
 def isPrime(number) :
 	"""	Checks if the number is prime
@@ -35,27 +32,27 @@ def isPrime(number) :
 
 if __name__ == '__main__': 
 	# The main is doing a speed test of the "isPrime" function
-	
-	print(f"{Fore.BLUE}\n =============================== Prime speed test ==============================")
-	print(f" This is a speed test for a function that determines if a number is prime or not {Style.RESET_ALL}")
+
+	print("\n =============================== Prime speed test ==============================")
+	print(" This is a speed test for a function that determines if a number is prime or not")
 	
 	while True :
 		try :
-			minNumber = int(input(f"{Fore.YELLOW}\n Min number : {Style.RESET_ALL}")) # The min number which the program will tests
-			maxNumber = int(input(f"{Fore.YELLOW}\n Max number : {Style.RESET_ALL}")) # The max number which the program will tests
+			minNumber = int(input("\n Min number : ")) # The min number which the program will tests
+			maxNumber = int(input("\n Max number : ")) # The max number which the program will tests
 
 			if maxNumber < minNumber :
-				raise Exception(f"{Fore.RED} The max number have to be greater than the minimum !{Style.RESET_ALL}")
+				raise Exception(" The max number have to be greater than the minimum !")
 			break;
 		except ValueError as e:
-			print(f"{Fore.RED} Please type a correct number !{Style.RESET_ALL}")
+			print(" Please type a correct number ! ")
 			continue
 		except Exception as e:
 			print(e)
 			continue
 			
 
-	timer = clock() # Start of the timer
+	timer = perf_counter() # Start of the timer
 
 	number = minNumber
 	incPrime = 0 # The total number of prime
@@ -66,12 +63,12 @@ if __name__ == '__main__':
 		number += 1 # Increments the actual number
 
 	
-	timer = round(clock() - timer, 2) # End of the timer
+	timer = round(perf_counter() - timer, 2) # End of the timer
 
-	print(f"\n{Fore.BLUE} Time : {Style.RESET_ALL}{timer}") # Print the time that has been taken to perform the task
-	print(f"{Fore.BLUE} Number of prime number between {minNumber} and {maxNumber} : {Style.RESET_ALL}{incPrime}") # Print the total of prime number which have been found sub the max
+	print(" Time : {}".format(timer)) # Print the time that has been taken to perform the task
+	print(" Number of prime number between {} and {} : {}".format(minNumber, maxNumber, incPrime)) # Print the total of prime number which have been found sub the max
 
-	print(f"""\n{Fore.GREEN} 'Mathematicians have tried in vain to this day to discover some order in the sequence of prime numbers, 
- and we have reason to believe that it is a mystery into which the human mind will never penetrate.', Leonhard Euler\n{Style.RESET_ALL}""") # A quote about prime number :)
+	print("\n 'Mathematicians have tried in vain to this day to discover some order in the sequence of prime numbers,"
+					+ "and we have reason to believe that it is a mystery into which the human mind will never penetrate.', Leonhard Euler\n") # A quote about prime number :)
 
 
