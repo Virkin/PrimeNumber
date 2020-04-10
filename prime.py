@@ -3,7 +3,11 @@
 from time import perf_counter
 from math import sqrt
 
-def isPrime(number) :
+import multiprocessing
+
+primeNumberList = [];
+
+def oldIsPrime(number) :
 	"""	Checks if the number is prime
 		Return True if it is a prime number, else return False""" 
 	
@@ -30,29 +34,40 @@ def isPrime(number) :
 	
 	return True
 
+def isPrime(number) :
+	if number == 1 :
+		return False
+	else :
+		for prime in primeNumberList :
+			if prime <= sqrt(number) :
+				if number%prime == 0 : # If the number can be divide by the divisor, then the number is not a prime
+					return False
+			else :
+				break
+		
+		primeNumberList.append(number)
+		return True
+
 if __name__ == '__main__': 
 	# The main is doing a speed test of the "isPrime" function
+
+	print("nb core : {}".format(multiprocessing.cpu_count()))
 
 	print("\n =============================== Prime speed test ==============================")
 	print(" This is a speed test for a function that determines if a number is prime or not")
 	
 	while True :
 		try :
-			minNumber = int(input("\n Min number : ")) # The min number which the program will tests
 			maxNumber = int(input("\n Max number : ")) # The max number which the program will tests
-
-			if maxNumber < minNumber :
-				raise Exception(" The max number have to be greater than the minimum !")
-			break;
+			break
 		except ValueError as e:
 			print(" Please type a correct number ! ")
-			continue
 		except Exception as e:
 			print(e)
-			continue
 			
-
 	timer = perf_counter() # Start of the timer
+
+	minNumber = 1
 
 	number = minNumber
 	incPrime = 0 # The total number of prime
